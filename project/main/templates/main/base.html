@@ -1,0 +1,270 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Site for the restaurant">
+  <meta name="author" content="Dubovyi Denys">
+  <title>Istanbul Kebab & Grill Restaurant</title>
+  <!-- Bootstrap core CSS -->
+  <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="https://getbootstrap.com/docs/5.0/examples/cover/cover.css" rel="stylesheet">
+  {% block style %} {% endblock %}
+  <style>
+    .fade-out {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .fade-out-transition {
+      opacity: 1;
+    }
+
+    .navbar-brand {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .black-bg-header {
+      background-color: black;
+      height: 14vh;
+    }
+
+    .black-bg {
+      background-color: black;
+    }
+
+    .navbar-nav .nav-link {
+      margin-right: 5%;
+      color: white;
+      padding-bottom: 3px;
+      font-weight: bold;
+    }
+
+    .navbar-nav .active>.nav-link {
+      color: white;
+      display: inline-block;
+      width: auto;
+      position: relative;
+      padding-bottom: 3px;
+      font-weight: bold;
+    }
+
+    .navbar-nav .active>.nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: white;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.5s ease-out;
+    }
+
+    .navbar-nav .active>.nav-link:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* Скрыть элементы меню при ширине экрана больше 768 пикселей */
+    @media (min-width: 768px) {
+      .nav-item {
+        margin-left: 1rem;
+        font-size: 100%;
+        padding: 0;
+        float: right;
+      }
+
+      .navbar-toggler {
+        display: none;
+      }
+
+      .navbar-nav {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-item {
+        /* font-size: 77%; */
+        float: right;
+        padding: -30%;
+      }
+    }
+
+
+
+    /* Показать элементы меню при ширине экрана меньше 768 пикселей */
+    @media (max-width: 575.5px) {
+
+      .black-bg-ph {
+        background-color: #000;
+        width: 100vh;
+        padding-right: 20%;
+        transform: translate(20%, 10vh);
+      }
+
+      .navbar-nav {
+        display: none;
+      }
+
+      .navbar-toggler {
+        position: fixed;
+        top: -5vh;
+        right: 5%;
+        transform: translateY(-50%);
+      }
+
+      .navbar-nav.show {
+        display: flex;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .navbar-nav.show .hidden {
+        display: block;
+      }
+
+      .nav-mb {
+        font-size: 100%;
+        float: right;
+        top: 12vh;
+        text-align: right;
+      }
+
+      .logo-position {
+        position: fixed;
+        right: 48%;
+        transform: translate(45%);
+      }
+    }
+
+    .container-x {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-position {
+      position: absolute;
+      right: 10vh;
+      top: 17px;
+    }
+
+    .logo-position {
+      position: absolute;
+      left: 17vh;
+    }
+
+
+    .navbar-toggler-iconX,
+    .navbar-toggler-iconX-second,
+    .navbar-toggler-iconX-third {
+      width: 25px;
+      height: 20px;
+      background-color: #000;
+      border-radius: 2px;
+      z-index: 1000;
+      position: fixed;
+      top: 12vh;
+      right: 0%;
+      transform: translateY(-50%);
+    }
+
+    .navbar-toggler-iconX,
+    .navbar-toggler-iconX-second,
+    .navbar-toggler-iconX-third {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: #fff;
+      border-radius: 2px;
+      margin-top: 5px;
+    }
+
+    .navbar-toggler-iconX {
+      margin-top: 3;
+    }
+
+    .navbar-toggler-iconX-second {
+      margin-top: -3px;
+    }
+
+    .navbar-toggler-iconX-third {
+      margin-top: 13px;
+    }
+  </style>
+
+</head>
+
+<body class="d-flex h-100 text-center text-white bg-white flex-column min-vh-100">
+  <header class="navbar navbar-expand-sm navbar-dark fixed-top black-bg-header border-2">
+    <div class="container-x d-flex justify-content-between">
+      <a class="logo-position" href="{% url 'home' %}">
+        <img src="{% static 'logo.png' %}" alt="Logo" class="logo" width="65px" height="65px">
+      </a>
+      <div>
+        <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <div class="navbar-toggler-bg">
+            <span class="navbar-toggler-iconX"></span>
+            <span class="navbar-toggler-iconX-second"></span>
+            <span class="navbar-toggler-iconX-third"></span>
+          </div>
+        </button>
+        <div class="d-flex justify-content-end collapse navbar-collapse navbar-position black-bg-ph"
+          id="navbarCollapse">
+          <ul class="navbar-nav ml-auto navbar">
+            <li class="nav-item nav-mb hidden {% if current_page == 'home' %}active{% endif %}">
+              <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item nav-mb hidden {% if current_page == 'menu' %}active{% endif %}">
+              <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+            </li>
+            <li class="nav-item nav-mb hidden {% if current_page == 'contact' %}active{% endif %}">
+              <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+            </li>
+            <li class="nav-item nav-mb hidden {% if current_page == 'about-us' %}active{% endif %}">
+              <a class="nav-link" style="white-space: nowrap;" href="{% url 'about-us' %}">About us</a>
+            </li>
+            <li class="nav-item nav-mb hidden {% if current_page == 'delivery' %}active{% endif %}">
+              <a class="nav-link" href="{% url 'delivery' %}">Delivery</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </header>
+  <main class="fade-out">
+    {% block content %} {% endblock %}
+  </main>
+  <footer class="nav fade-out mt-auto d-flex justify-content-between black-bg fixed-bottom">
+    <p class="mb-3 mb-md-1 text-body-secondary align-self-end">© 2023 Istanbul Restaurant</p>
+    <a class="fab fa-facebook fa-lg text-white navbar-brand"
+      href="https://www.facebook.com/people/Istanbul-Kebab-Grill-Restaurant-Takeaway/100083546643446/"></a>
+
+  </footer>
+  {% block script %} {% endblock %}
+  <script src="{% static 'js/jquery-3.6.4.min.js' %}"></script>
+  <script src="{% static 'js/animation.js' %}"></script>
+  <script src="{% static 'js/viewing.js' %}"></script>
+  <script src="{% static 'js/del-anchor.js' %}"></script>
+  <script src="{% static 'js/header.js' %}"></script>
+  <script>
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarNav = document.querySelector('.navbar-nav');
+
+    navbarToggler.addEventListener('click', () => {
+      navbarNav.classList.toggle('show');
+    });
+  </script>
+</body>
+
+</html>

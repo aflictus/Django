@@ -1,0 +1,220 @@
+{% extends "main/base.html" %}
+{% load my_filters %}
+{% load static %}
+
+{% block style %}
+<style>
+    .margin {
+        margin-top: 87px;
+        margin-block-end: 17px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .margin {
+            margin-top: 14vh;
+            margin-block-end: 7%;
+        }
+
+        .centered-element {
+            visibility: hidden;
+        }
+
+        .item_title {
+            line-height: 0.8;
+            font-size: 100% !important;
+        }
+
+
+        .item_desc {
+            color: #9c9c9c;
+            font-size: 80% !important;
+            line-height: 0.8;
+        }
+
+        .title_desc {
+            color: #ff0000;
+            font-size: 80% !important;
+        }
+
+    }
+
+    .text-dark {
+        color: #000 !important;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .centered-element {
+        position: fixed;
+        top: 15%;
+        left: 2%;
+        width: 175px;
+    }
+
+    .item_alergian {
+        font-size: 70%;
+        color: #ff0000;
+    }
+
+    .item_price {
+        float: right;
+        font-size: 75%;
+    }
+
+    .item_desc {
+        color: #9c9c9c;
+        font-size: 90%;
+        line-height: 0.8;
+    }
+
+    .item_title {
+        line-height: 0.8;
+        font-size: 120%;
+    }
+
+    .sub_title {
+        float: right;
+        font-size: 60%;
+        line-height: 0.5;
+    }
+
+    .title {
+        padding-top: 3%;
+    }
+
+    .width {
+        width: 80% important !;
+    }
+
+    title::after {
+        content: none;
+        /* убираем контент, который добавляется после ссылки */
+    }
+
+    .title_desc {
+        color: #ff0000;
+    }
+
+    .border-bottom-cus {
+        border-bottom: double black 5px;
+    }
+
+    .anchor {
+        position: relative;
+        top: -7vh;
+        transform: translateY(+7%);
+        visibility: hidden;
+    }
+
+    .nav-btn {
+        position: relative;
+        text-align: left;
+        display: inline-block;
+        color: black;
+    }
+
+    .nav-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -2%;
+        width: 2%;
+        height: 100%;
+        color: black;
+        background-color: gray;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    .nav-btn:hover::before {
+        opacity: 1;
+    }
+
+    .nav-btn.active::before {
+        background-color: black;
+        opacity: 1;
+    }
+
+    /* Изменение цвета подсвечивания */
+    .nav-btn:focus {
+        box-shadow: none;
+    }
+
+    #btn-back-to-top {
+        position: fixed;
+        bottom: 7%;
+        right: 5%;
+        display: none;
+        opacity: 0.7;
+    }
+
+    .menu-pd {
+        padding-right: 20px;
+        /* задаем отступ справа */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container margin width">
+    <div class="row">
+        <div class="centered-element">
+            <ul class="text-left list-group navbar-brand text-dark border-start">
+                {% for el in menu_groups %}
+                <a class="btn nav-btn text-dark" href="#{{ el.title|del_space }}">{{ el.title }}</a>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="text-dark text-left d-flex align-items-center justify-content-center">
+            <ul class="col-md-6 shadow menu-pd">
+                <!-- <h1 class="text-center">Menu:</h1> -->
+                {% for gl in menu_groups %}
+                <li class="title" id="{{gl.title|del_space}}">
+                    <h3 class="border-bottom-cus">{{gl.title}}
+                        {% if gl.sub_title != "None" %}
+                        <span class="sub_title">{{gl.sub_title}}</span>
+                        {% endif %}
+                    </h3>
+                    {% if gl.title_desc != "None" %}
+                    <p class="title_desc">{{ gl.title_desc }}</p>
+                    {% endif %}
+
+                    {% for el in menu %}
+                    {% if el.title == gl.title %}
+                    <h4 class="menu_list">
+                        <h4 class="item_title">{{el.item}}
+                            {% if el.alergian != "None" %}
+                            <span class="item_alergian">{{el.alergian}}</span>
+                            {% endif %}
+                            {% if el.price|pop_space != el.price %}
+                            <span
+                                class="item_price">{{el.price|pop_space}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            {% else %}
+                            <span class="item_price">{{el.price}}</span>
+                            {% endif %}
+                        </h4>
+                        {% if el.description != "None" %}
+                        <p class="item_desc">{{ el.description }}</p>
+                        {% else %}
+                        <p class="item_desc"></p>
+                        {% endif %}
+                    </h4>
+                    {% endif %}
+                    {% endfor %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        </section>
+    </div>
+</div>
+<button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
+    <i class="fas fa-arrow-up"></i>
+</button>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/scroll-btn.js' %}"></script>
+{% endblock %}

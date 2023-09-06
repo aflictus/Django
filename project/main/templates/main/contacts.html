@@ -1,0 +1,82 @@
+{% extends "main/base.html" %}
+
+{% block style %}
+<style>
+    .padding-map {
+        padding: 20px;
+    }
+
+    .bg {
+        background-color: black;
+        border: grey double 1vh;
+        margin: 1vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        min-height: 20vh;
+        margin-top: 120px;
+        color: white;
+
+    }
+
+
+    @media (max-width: 768px) {
+        .bg {
+            width: auto;
+            margin-top: 20px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 100px;
+        }
+    }
+
+
+    @media screen and (max-width: 992px) {
+        iframe {
+            width: 100%;
+            /* height: auto; */
+            margin-right: 70%;
+            /* transform: translateX(-2%); */
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container margin-for-ph">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="bg">
+                <h2>Address:</h2>
+                <p>1-2 Cabey's Lane, Parnell Street,<br>Ennis, co. Clare</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="bg">
+                <h2>Phone number:</h2>
+                <p>+353(65)688-36-08</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="bg">
+                <h2>Working hours:</h2>
+                <p>Monday to Saturday - 13pm to 23pm<br>Sunday - 14pm to 23pm
+                </p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="padding-map">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2409.8126545637083!2d-8.988265623351046!3d52.84376077214772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x485b13c39cb2633d%3A0x3dce9aace7990103!2s%C4%B0STANBUL%20Kebab%20%26%20Grill%20Restaurant%20Takeaway!5e0!3m2!1sru!2sie!4v1682966721577!5m2!1sru!2sie"
+                    width="800vh" height="350vh" style="border: 0; margin-block-end: 4%;" allowfullscreen=""
+                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
